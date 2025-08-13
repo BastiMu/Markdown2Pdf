@@ -10,6 +10,7 @@ using Markdig.Extensions.AutoIdentifiers;
 using Markdown2Pdf.Options;
 using Markdown2Pdf.Services;
 using PuppeteerSharp;
+using PuppeteerSharp.BrowserData;
 using PuppeteerSharp.Media;
 
 namespace Markdown2Pdf;
@@ -417,12 +418,19 @@ public class Markdown2PdfConverter : IConvertionEvents {
       return await Puppeteer.LaunchAsync(launchOptions);
     }
 
-    using var browserFetcher = new BrowserFetcher();
+    var browserFetcher = new BrowserFetcher();
     var installed = browserFetcher.GetInstalledBrowsers();
+    var hasDefaultRevisionInstalled = installed.Any(installedBrowser => installedBrowser.BuildId == Chrome.DefaultBuildId);
 
-    if (!installed.Any()) {
-      Console.WriteLine("Path to chrome was not specified. Downloading chrome...");
-      _ = await browserFetcher.DownloadAsync();
+    if (!hasDefaultRevisionInstalled) {
+      // Uninstall old revisions
+      foreach (var oldBrowser in installed) {
+        Console.WriteLine($"Uninstalling old Chrome version {oldBrowser.BuildId} from {browserFetcher.CacheDir}...");
+        browserFetcher.Uninstall(oldBrowser.BuildId);
+      }
+
+      Console.WriteLine($"Path to Chrome was not specified & default build is not installed. Downloading Chrome version {Chrome.DefaultBuildId} to {browserFetcher.CacheDir}...");
+      _ = await browserFetcher.DownloadAsync(Chrome.DefaultBuildId);
     }
 
     return await Puppeteer.LaunchAsync(launchOptions);
