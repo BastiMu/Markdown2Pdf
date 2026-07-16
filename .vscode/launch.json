@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/Markdown2Pdf.Demo/bin/Debug/net8.0/Markdown2Pdf.Demo.dll",
+            "program": "${workspaceFolder}/Markdown2Pdf.Demo/bin/Debug/net10.0/Markdown2Pdf.Demo.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Markdown2Pdf.Demo",
             "console": "internalConsole",
