@@ -30,7 +30,7 @@ public partial class HtmlTests {
   [Test]
   public async Task Should_Use_Modules([Values(
     "<mjx-math class=\"MJX-TEX\" aria-hidden=\"true\">",
-    "<div class=\"mermaid\" data-processed=\"true\">",
+    "<pre class=\"mermaid\" data-processed=\"true\">",
     "<span class=\"hljs-keyword\">public</span>"
     )] string expectedHtmlContent, [Values(true, false)] bool runLocally) {
     // Arrange
