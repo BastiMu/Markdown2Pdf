@@ -129,7 +129,7 @@ internal class TableOfContentsCreator {
     foreach (var page in pdf.GetPages()) {
       var text = ContentOrderTextExtractor.GetText(page);
       var lines = _lineBreakRegex.Split(text);
-      IEnumerable<Annotation> annotations = page.ExperimentalAccess.GetAnnotations();
+      IEnumerable<Annotation> annotations = page.GetAnnotations();
 
       // the invisible link rectangles in the TOC contains the link addresses and the destination page
       // it is possible to extract both information and link them to the TOC elements
