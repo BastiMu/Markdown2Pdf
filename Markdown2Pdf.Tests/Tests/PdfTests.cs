@@ -129,8 +129,8 @@ public class PdfTests {
   }
 
   private static object[] _GetTestCasesPdfPath() => [
-      new [] { Path.Combine(Utils.tempDir.FullName, "myhello.pdf") },
-      new [] { Path.Combine(Utils.tempDir.FullName, "test", "myhello.pdf") },
+      (object)Path.Combine(Utils.tempDir.FullName, "myhello.pdf"),
+      (object)Path.Combine(Utils.tempDir.FullName, "test", "myhello.pdf"),
     ];
 
   [Test]
@@ -173,7 +173,7 @@ public class PdfTests {
   [TestCase("testDocumentTitle", null, "testDocumentTitle")]
   [TestCase(null, "myMetadataTitle", "myMetadataTitle")]
   [TestCase("testDocumentTitle", "myMetadataTitle", "myMetadataTitle")]
-  public async Task Should_Set_Pdf_Metadata(string documentTitle, string metadataTitle, string expectedTitle) {
+  public async Task Should_Set_Pdf_Metadata(string? documentTitle, string? metadataTitle, string expectedTitle) {
     // Arrange
 
     var options = new Markdown2PdfOptions {
