@@ -1,6 +1,6 @@
 # Run this before running the tests
 
-$targetDirectory = ".\bin\Debug\net8.0"
+$targetDirectory = ".\bin\Debug\net10.0"
 
 New-Item -ItemType Directory -Force -Path $targetDirectory | Out-Null
 Copy-Item -Path "..\Markdown2Pdf\package.json" -Destination $targetDirectory
